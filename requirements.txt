@@ -1,5 +1,7 @@
 alembic
 
+gunicorn
+
 astroid
 
 certifi
