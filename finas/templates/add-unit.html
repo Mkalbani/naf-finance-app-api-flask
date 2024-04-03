@@ -1,0 +1,61 @@
+{% include 'header.html' %}
+    <body class="sb-nav-fixed">
+        {% include 'nav.html' %}
+        <div id="layoutSidenav">
+            {% include 'siderbar.html' %}
+            <div id="layoutSidenav_content">
+                <main>
+                    <div class="container-fluid">
+                        <h1 class="mt-4">Add Unit</h1>
+                        <ol class="breadcrumb mb-4">
+                            <li class="breadcrumb-item active"></li>
+                        </ol>
+                        <div class="col-md-12">
+                            <div class="card shadow-lg border-0 rounded-lg mt-5">
+                                <div class="card-header"><h3 class="text-center font-weight-light my-4">Unit Info</h3></div>
+                                <div class="card-body">
+
+                                    <form method="POST" id="unitForm">
+                                        <div class="form-row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="small mb-1" for="unit">Unit Name</label>
+                                                    <input required class="form-control py-2" id="nam" name="nam" type="text" placeholder="Enter Unit's Name'" />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="small mb-1" for="inputLastName">Location of Unit</label>
+                                                    <select required class="form-control py-2 select2" name="locid" id="locid">
+                                                        <option selected value="0">Select Location</option>
+                                                            {% for loc in locs %}
+                                                        <option value="{{loc.id}}">{{loc.locnam}}</option>
+                                                            {% endfor %}
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="small mb-1" for="inputLastName">Command</label>
+                                                    <select required class="form-control py-2" name="comdid" id="comdid">
+                                                        <option selected value="0">Select Command</option>
+                                                            {% for comd in comds %}
+                                                        <option value="{{comd.id}}">{{comd.nam}}</option>
+                                                            {% endfor %}
+                                                    </select>
+                                                </div>
+                                            </div> 
+                                        </div>
+                                        <div class="form-group mt-4 mb-0"><button class="btn btn-primary btn-block" id="addUnit">Add Unit</button></div>
+                                    </form>
+                                </div>
+                                <!-- <div class="card-footer text-center">
+                                    <div class="small"><a href="login.html">Have an account? Go to login</a></div>
+                                </div> -->
+                            </div>
+                        </div>
+                    </div>
+                </main>
+{% include 'footer.html' %}
+<script src = "{{url_for('static',filename='js/custom/main.js')}}"></script>
+<script src="{{url_for('static', filename='js/custom/unit.js')}}"></script>

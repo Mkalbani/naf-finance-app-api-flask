@@ -1,0 +1,54 @@
+{% include 'header.html' %}
+    <body class="sb-nav-fixed">
+        {% include 'nav.html' %}
+        <div id="layoutSidenav">
+            {% include 'siderbar.html' %}
+            <div id="layoutSidenav_content">
+                <main>
+                    <div class="container-fluid">
+                        <h1 class="mt-4">Add Command</h1>
+                        <ol class="breadcrumb mb-4">
+                            <li class="breadcrumb-item active"></li>
+                        </ol>
+                        <div class="col-md-12">
+                            <div class="card shadow-lg border-0 rounded-lg mt-5">
+                                <div class="card-header"><h3 class="text-center font-weight-light my-4">Command Info</h3></div>
+                                <div class="card-body">
+
+                                    <form method="POST" id="acctForm">
+                                        <div class="form-row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="small mb-1" for="nam">Command Name</label>
+                                                    <input class="form-control py-2" id="unit" name="nam" type="text" placeholder="Enter Command's Name" />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="small mb-1" for="inputLastName">Location of Command</label>
+                                                    <select class="form-control py-2" name="locid" id="locnamid">
+                                                            {% for loc in locs %}
+                                                        <option value="{{loc.id}}">{{loc.locnam}}</option>
+                                                            {% endfor %}
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="small mb-1" for="inputLastName">Order of Command</label>
+                                                    <input class="form-control py-2" id="unit" name="order" type="text" placeholder="Enter Order of Command" />
+                                                </div>
+                                            </div> 
+                                        </div>
+                                        <div class="form-group mt-4 mb-0"><button class="btn btn-primary btn-block" id="addComd">Add Command</button></div>
+                                    </form>
+                                </div>
+                                <!-- <div class="card-footer text-center">
+                                    <div class="small"><a href="login.html">Have an account? Go to login</a></div>
+                                </div> -->
+                            </div>
+                        </div>
+                    </div>
+                </main>
+{% include 'footer.html' %}
+<script src="{{url_for('static', filename='js/custom/pers.js')}}"></script>

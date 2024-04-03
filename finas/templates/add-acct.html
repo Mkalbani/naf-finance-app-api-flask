@@ -1,0 +1,55 @@
+{% include 'header.html' %}
+    <body class="sb-nav-fixed">
+        {% include 'nav.html' %}
+        <div id="layoutSidenav">
+            {% include 'siderbar.html' %}
+            <div id="layoutSidenav_content">
+                <main>
+                    <div class="container-fluid">
+                        <h1 class="mt-4">Add Account</h1>
+                        <ol class="breadcrumb mb-4">
+                            <li class="breadcrumb-item active"></li>
+                        </ol>
+                        <div class="col-md-12">
+                            <div class="card shadow-lg border-0 rounded-lg mt-5">
+                                <div class="card-header"><h3 class="text-center font-weight-light my-4">Account Info</h3></div>
+                                <div class="card-body">
+
+                                    <form method="POST" id="acctForm">
+                                        <div class="form-row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="small mb-1" for="nam">Account Name</label>
+                                                    <input class="form-control py-2" id="nam" name="nam" type="text" placeholder="Enter Account Name" />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="small mb-1" for="inputLastName">Unit</label>
+                                                    <select class="select2 form-control py-2" name="unitid" id="unitid">
+                                                            {% for unit in units %}
+                                                        <option value="{{unit.id}}">{{unit.nam}}</option>
+                                                            {% endfor %}
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="small mb-1" for="inputLastName">Description of Account</label>
+                                                    <input class="form-control py-2" id="descrip" name="descrip" type="text" placeholder="Enter Description for the Account" />
+                                                </div>
+                                            </div> 
+                                        </div>
+                                        <div class="form-group mt-4 mb-0"><button class="btn btn-primary btn-block" id="addAcct">Add Account</button></div>
+                                    </form>
+                                </div>
+                                <!-- <div class="card-footer text-center">
+                                    <div class="small"><a href="login.html">Have an account? Go to login</a></div>
+                                </div> -->
+                            </div>
+                        </div>
+                    </div>
+                </main>
+{% include 'footer.html' %}
+<script src = "{{url_for('static', filename='js/custom/main.js')}}"></script>
+<script src="{{url_for('static', filename='js/custom/pers.js')}}"></script>

@@ -1,0 +1,205 @@
+{% include 'header.html' %}
+    <body class="sb-nav-fixed">        
+        {% include 'nav.html' %}
+        <div id="layoutSidenav">
+            {% include 'siderbar.html' %}
+            <div id="layoutSidenav_content">
+                <main>
+                    <div class="container-fluid">
+                        <h1 class="mt-4" id="formTitle">OutFlow</h1>
+                        <ol class="breadcrumb mb-4">
+                            <li class="breadcrumb-item active"></li>
+                        </ol>
+                        <div class="col-md-12">
+                            <div class="card shadow-lg border-0 rounded-lg mt-5">
+                                <div class="card-header"><h3 class="text-center font-weight-light my-4">Transaction</h3></div>
+                                <div class="card-body">
+
+                                    <nav class="nav nav-pills nav-fill">
+                                        <a class="nav-item nav-link active" href="#" show="#outFlowForm" hide="#inFlowForm" name="Outflow">Outflow</a>
+                                        <a class="nav-item nav-link" href="#" show="#inFlowForm" hide="#outFlowForm" name="Inflow">Inflow</a>
+                                      </nav>
+
+                                    <div id="outFlowForm">
+                                        <form method="POST">
+                                            <div class="form-row">
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label class="small mb-1" for="amount">Amount</label>
+                                                        <input class="form-control py-2" id="amount" name="amount" type="text" placeholder="Enter Amount" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label class="small mb-1" for="accid">Account</label>
+                                                        <select class="select2 form-control py-2" name="accid" id="accid">
+                                                                {% for acct in accts %}
+                                                            <option value="{{acct.id}}">{{acct.nam}}</option>
+                                                                {% endfor %}
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label class="small mb-1" for="subhid">purpose</label>
+                                                        <select class="select2 form-control py-2" name="subhid" id="subhid">
+                                                            {% for purp in purps %}
+                                                                <option value="{{purp.id}}">0{{purp.code}} - 0{{purp.shc}} - ({{purp.descrip}})</option>
+                                                            {% endfor %}
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label class="small mb-1" for="persid">Payee</label>
+                                                        <select class="select2 form-control py-2" name="persid" id="persid">
+                                                            {% for per in pers %}
+                                                                <option value="{{per.id}}">{{per.rank}} {{per.fnam}} {{per.onam}} {{per.snam}} - ({{per.svcn}})</option>
+                                                            {% endfor %}
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label class="small mb-1" for="unitid">Payee Unit</label>
+                                                        <select class="select2 form-control py-2" name="unitid" id="unitid">
+                                                            {% for unit in units %}
+                                                                <option value="{{unit.id}}">{{unit.nam}}</option>
+                                                            {% endfor %}
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label class="small mb-1" for="date">Date</label>
+                                                        <input class="form-control py-2" id="date" name="date"  type="text" placeholder="Enter Date of Transaction" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label class="small mb-1" for="auth">Authority</label>
+                                                        <input class="form-control py-2" id="auth" name="auth"  type="text" placeholder="Approving Authority" />
+                                                        <input class="form-control py-2" id="admid" name=admid  type="hidden" value="{{current_user.id}}"/>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label class="small mb-1" for="remarks">Remarks (Optional)</label>
+                                                        <input class="form-control py-2" id="remark" name="remark"  type="text" placeholder="Enter Remarks for Transaction" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group mt-4 mb-0"><button class="btn btn-primary btn-block" id="newTrans">Commit Transaction</button></div>
+                                        </form>
+                                    </div>
+
+                                    <div id="inFlowForm">
+                                    <form method="POST">
+                                        <div class="form-row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="small mb-1" for="amount2">Amount</label>
+                                                    <input class="form-control py-2" id="amount2" name="amount" type="text" placeholder="Enter Amount" />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="small mb-1" for="accid2">Account</label>
+                                                    <select class="select2 form-control py-2" name="accid" id="accid2">
+                                                            {% for acct in accts %}
+                                                        <option value="{{acct.id}}">{{acct.nam}}</option>
+                                                            {% endfor %}
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="small mb-1" for="subhid2">purpose</label>
+                                                    <select class="select2 form-control py-2" name="subhid" id="subhid2">
+                                                        {% for purp in purps %}
+                                                            <option value="{{purp.id}}">0{{purp.code}} - 0{{purp.shc}} - ({{purp.descrip}})</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="small mb-1" for="persid2">Payer</label>
+                                                    <select class="select2 form-control py-2" name="persid" id="persid2">
+                                                        {% for per in pers %}
+                                                            <option value="{{per.id}}">{{per.rank}} {{per.fnam}} {{per.onam}} {{per.snam}} - ({{per.svcn}})</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="small mb-1" for="unitid2">Payer Unit</label>
+                                                    <select class="select2 form-control py-2" name="unitid" id="unitid2">
+                                                        {% for unit in units %}
+                                                            <option value="{{unit.id}}">{{unit.nam}}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="small mb-1" for="date2">Date</label>
+                                                    <input class="form-control py-2" id="date2" name="date"  type="text" placeholder="Enter Date of Transaction" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="small mb-1" for="auth2">Authority</label>
+                                                    <input class="form-control py-2" id="auth2" name="auth"  type="text" placeholder="Approving Authority" />
+                                                    <input class="form-control py-2" id="admid2" name=admid  type="hidden" value="{{current_user.id}}"/>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="small mb-1" for="remarks2">Remarks (Optional)</label>
+                                                    <input class="form-control py-2" id="remark2" name="remark"  type="text" placeholder="Enter Remarks for Transaction" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mt-4 mb-0"><button class="btn btn-primary btn-block" id="newTrans2">Commit Transaction</button></div>
+                                    </form>
+                                </div>
+                                </div>
+                                <!-- <div class="card-footer text-center">
+                                    <div class="small"><a href="login.html">Have an account? Go to login</a></div>
+                                </div> -->
+                            </div>
+                        </div>
+                    </div>
+                </main>
+{% include 'footer.html' %}
+<script>
+    $(document).ready(function(){
+        setTimeout(function() { 
+            $('#inFlowForm').attr('hidden', true);
+        }, 1);
+    });
+
+    $(document).on('click', '.nav-link', function(){
+        title = $(this).attr('name')
+        $('#formTitle').html(title)
+        $(this).nextAll('.active').removeClass('active');
+        $(this).prevAll('.active').removeClass('active');
+        $(this).addClass('active');
+        form_to_show = $(this).attr('show');
+        form_to_hide = $(this).attr('hide');
+        $(form_to_show).attr('hidden', false);
+        $(form_to_hide).attr('hidden', true);
+    });
+</script>
+<script src="{{url_for('static', filename='js/custom/main.js')}}"></script>
+<script src="{{url_for('static', filename='js/custom/trans.js')}}"></script>
